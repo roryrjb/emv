@@ -1,12 +1,13 @@
 import os
 import tempfile
+import shlex
 import subprocess
 import sys
 
 
 def main():
     files = sys.argv[1:]
-    
+
     with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as tmpfile:
         filenames_file = tmpfile.name
 
@@ -16,8 +17,8 @@ def main():
             src = [f for f in os.listdir(".") if os.path.isfile(f)]
         tmpfile.write("\n".join(src))
 
-    editor = os.environ.get("EDITOR", "vim").split(" ")
-    subprocess.call(editor + [filenames_file])
+    editor = os.environ.get("EDITOR", "vim")
+    subprocess.call(shlex.split(editor) + [filenames_file], shell=True)
 
     with open(filenames_file, "r") as tmpfile:
         dest = tmpfile.read().splitlines()
