@@ -6,3 +6,6 @@ lint:
 
 format:
 	black emv/
+
+exe:
+	python setup.py build_exe
