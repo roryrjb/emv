@@ -17,7 +17,7 @@ class PyInstaller(Command):
 
 setup(
     name="emv",
-    version="0.1",
+    version="0.2",
     description="Rename files with your editor",
     url="https://github.com/roryrjb/emv",
     author="Rory Bradford",

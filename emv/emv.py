@@ -18,7 +18,7 @@ def main():
         tmpfile.write("\n".join(src))
 
     editor = os.environ.get("EDITOR", "vim")
-    subprocess.call(shlex.split(editor) + [filenames_file], shell=True)
+    subprocess.call(shlex.split(editor, posix=False) + [filenames_file], shell=True)
 
     with open(filenames_file, "r") as tmpfile:
         dest = tmpfile.read().splitlines()
