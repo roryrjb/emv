@@ -19,8 +19,12 @@ def main():
             src = [f for f in os.listdir(".") if os.path.isfile(f)]
         tmpfile.write("\n".join(src))
 
-    editor = os.environ.get("EDITOR", "vim")
-    subprocess.call(shlex.split(editor, posix=False) + [filenames_file], shell=True)
+    editor = os.environ.get(
+        "EDITOR",
+        "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin",
+    )
+    editor_cmd = shlex.split(editor, posix=True) + [filenames_file]
+    subprocess.call(editor_cmd)
 
     with open(filenames_file, "r", encoding="utf-8") as tmpfile:
         dest = tmpfile.read().splitlines()
