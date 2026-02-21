@@ -8,7 +8,9 @@ import sys
 def main():
     files = sys.argv[1:]
 
-    with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as tmpfile:
+    with tempfile.NamedTemporaryFile(
+        mode="w+t", delete=False, encoding="utf-8"
+    ) as tmpfile:
         filenames_file = tmpfile.name
 
         if files:
@@ -20,7 +22,7 @@ def main():
     editor = os.environ.get("EDITOR", "vim")
     subprocess.call(shlex.split(editor, posix=False) + [filenames_file], shell=True)
 
-    with open(filenames_file, "r") as tmpfile:
+    with open(filenames_file, "r", encoding="utf-8") as tmpfile:
         dest = tmpfile.read().splitlines()
 
     os.remove(filenames_file)
